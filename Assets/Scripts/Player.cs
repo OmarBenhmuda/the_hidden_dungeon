@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
@@ -28,6 +30,9 @@ public class Player : MonoBehaviour
     public GameObject fireballRight;
     public GameObject fireballDown;
     public GameObject fireballLeft;
+
+    public Text currentAbilityText;
+
 
     private string abilityQueue = "";
 
@@ -70,7 +75,12 @@ public class Player : MonoBehaviour
 
     private void Ability()
     {
-        
+        if (abilityQueue.Length == 3)
+        {
+
+            abilityQueue = "";
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             abilityQueue += 'I';
@@ -84,15 +94,14 @@ public class Player : MonoBehaviour
             abilityQueue += 'P';
         }
 
+        currentAbilityText.text = "Current Input\n" + abilityQueue;
+
         if (abilityQueue == "IOP")
         {
             ShootFireball();
         }
 
-        if (abilityQueue.Length == 3)
-        {
-            abilityQueue = "";
-        }
+
     }
 
     private void SetDirection()
